@@ -1,10 +1,24 @@
 <script setup>
 import { ref } from 'vue';
 
-const newtodo=ref([]);
+const newtodo=ref([
+  {
+    id:0,
+    taskname:"code",
+    taskDes:"this is earning money"
+  },{
+    id:1,
+    taskname:"eating",
+    taskDes:"this is gaining energy"
+  },{
+    id:2,
+    taskname:"sleep",
+    taskDes:"for getting some rest"
+  }
+]);
 const dummy=ref(null);
 const taskDes=ref(null);
-const id=ref(0);
+const id=ref(3);
 
 const showCase = ref(false);
   
@@ -27,8 +41,8 @@ function newtaskadder() {
     id.value++;
     showCase.value = !showCase.value;
 }
-function taskdelete(id){
-  alert(id);
+function taskdelete(id) {
+  newtodo.value.splice(id, 1);
 }
 </script>
 
