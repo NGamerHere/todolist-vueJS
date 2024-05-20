@@ -21,9 +21,15 @@ const taskDes=ref(null);
 const id=ref(3);
 
 const showCase = ref(false);
+const showEdit=ref(false);
+const currentedit=ref(null);
   
   function handleButtonClick() {
     showCase.value = !showCase.value;
+  }
+  function handleditButton(index){
+     showEdit.value=!showEdit.value;
+     currentedit.value=index;
   }
   
 
@@ -55,17 +61,28 @@ function taskdelete(id) {
             <h3>{{ items.taskname }}</h3>
             <p>{{ items.taskDes }}</p>
            <button @click="taskdelete(key)">delete</button>
+           <button @click="handleditButton(key)">edit</button>
         </div>
         </div>
         <div class="overlay" v-if="showCase">
         <div class="card">
-          <input v-model="dummy" type="text" />
-          <input v-model="taskDes" type="text" />
+          <input v-model="dummy" type="text" placeholder="task name" />
+          <input v-model="taskDes" type="text"  placeholder="task Descripition"/>
           <button @click="newtaskadder" >add task</button>
           <button @click="handleButtonClick">Close</button>
         </div>
       </div>
-        <button @click="handleButtonClick" v-if="!showCase" class="taskBtn">Add new task</button>
+
+      <div class="overlay" v-if="showEdit">
+        <div class="card">
+          <input v-model="dummy" type="text" placeholder="task name" />
+          <input v-model="taskDes" type="text"  placeholder="task Descripition"/>
+          <button @click="newtaskadder" >add task</button>
+          <button @click="handleditButton">Close</button>
+        </div>
+      </div>
+      
+      <button @click="handleButtonClick" v-if="!showCase" class="taskBtn">Add new task</button>
          
          
     </main>
@@ -83,6 +100,9 @@ function taskdelete(id) {
  .taskBtn{
   margin:5px 0px 0px 10px;
  }
+ .taskCard button{
+  margin:5px 0px 0px 10px;
+ }
  .overlay {
     position: fixed;
     inset: 0;
@@ -94,13 +114,41 @@ function taskdelete(id) {
   }
   
   .card {
-    width: 450px;
-    height: 180px;
-    border: 1px solid black;
-    border-radius: 20px;
-    background-color: white;
-    padding: 20px;
-  }
+  width: 400px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.card input {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.card button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.card button:last-child {
+  background-color: #f44336;
+}
+
+.card button:hover {
+  opacity: 0.8;
+}
   .card-container{
     display: grid;
    grid-template-columns: 300px 300px 300px 300px;
