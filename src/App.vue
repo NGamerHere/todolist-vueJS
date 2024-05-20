@@ -60,7 +60,7 @@ function taskdelete(id){
 <style>
  .taskCard{
     width: 270px;
-    height: 100px;
+    height: 130px;
     border: 0.5px black solid;
     border-radius: 5px;
     padding: 10px;
@@ -86,6 +86,11 @@ function taskdelete(id){
     border-radius: 20px;
     background-color: white;
     padding: 20px;
+  }
+  .card-container{
+    display: grid;
+   grid-template-columns: 300px 300px 300px 300px;
+   gap: 10px;
   }
   
 </style>
